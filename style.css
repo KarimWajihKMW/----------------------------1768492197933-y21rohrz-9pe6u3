@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+
+body {
+    font-family: 'Cairo', sans-serif;
+}
+
+.font-cairo {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Hide Scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Animations */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card-enter {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Admin/Cart Transition classes logic managed via JS/Tailwind, but helper classes here */
+#cartPanel.open {
+    transform: translateX(0);
+}
