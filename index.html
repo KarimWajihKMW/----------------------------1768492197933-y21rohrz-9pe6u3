@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOKOCD - متجر البرمجيات والألعاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-cairo overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2 cursor-pointer group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:rotate-12 transition-transform duration-300">
+                        K
+                    </div>
+                    <span class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600 tracking-tighter">KOKOCD</span>
+                </div>
+                
+                <div class="hidden md:flex flex-1 max-w-lg mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" placeholder="ابحث عن برامج، ألعاب، كورسات..." 
+                            class="w-full bg-gray-100 text-gray-700 rounded-full py-2.5 px-6 pl-12 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:bg-white transition-all shadow-inner">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-4 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleAdmin()" class="hidden lg:flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm font-semibold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        لوحة التحكم
+                    </button>
+                    
+                    <div class="relative group cursor-pointer" onclick="toggleCart()">
+                        <div class="p-2 rounded-full bg-gray-100 group-hover:bg-indigo-100 text-gray-600 group-hover:text-indigo-600 transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        </div>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white transform scale-0 transition-transform duration-300">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-28 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative bg-gradient-to-r from-indigo-900 to-blue-800 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden text-white">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-400 opacity-10 rounded-full -ml-20 -mb-20 blur-3xl"></div>
+                
+                <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-6">
+                        <span class="bg-indigo-500/30 border border-indigo-400/30 text-indigo-100 text-xs font-bold px-3 py-1 rounded-full">وصل حديثاً</span>
+                        <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                            مكتبة KOKOCD الشاملة<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-300 to-indigo-200">للبرامج والألعاب</span>
+                        </h1>
+                        <p class="text-indigo-100 text-lg max-w-lg leading-relaxed">
+                            احصل على أحدث إصدارات الويندوز، أقوى الألعاب، وأفضل الكورسات التعليمية بأسعار تنافسية وطرق دفع سهلة وآمنة.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="bg-white text-indigo-900 px-8 py-3 rounded-xl font-bold hover:bg-indigo-50 hover:scale-105 transition-all shadow-lg flex items-center gap-2">
+                                تصفح المتجر
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </button>
+                            <button class="bg-indigo-700/50 backdrop-blur-sm border border-indigo-500/50 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700/70 transition-all">
+                                العروض الخاصة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex justify-center">
+                        <img src="https://placehold.co/500x350/1e1b4b/FFF?text=KOKOCD+Store" alt="KOKOCD Showcase" class="rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500 border-4 border-indigo-500/30">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        
+        <!-- Categories -->
+        <div class="flex overflow-x-auto pb-6 gap-4 no-scrollbar" id="categoryContainer">
+            <button class="category-btn active bg-indigo-600 text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-indigo-200 whitespace-nowrap transition-all" data-cat="all">الكل</button>
+            <button class="category-btn bg-white text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 px-6 py-2 rounded-full font-bold shadow-sm whitespace-nowrap transition-all" data-cat="windows">ويندوز وبرامج</button>
+            <button class="category-btn bg-white text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 px-6 py-2 rounded-full font-bold shadow-sm whitespace-nowrap transition-all" data-cat="games">ألعاب PC</button>
+            <button class="category-btn bg-white text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 px-6 py-2 rounded-full font-bold shadow-sm whitespace-nowrap transition-all" data-cat="courses">كورسات تعليمية</button>
+            <button class="category-btn bg-white text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 px-6 py-2 rounded-full font-bold shadow-sm whitespace-nowrap transition-all" data-cat="android">أندرويد</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+            <!-- Dynamic Content Here -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-black text-gray-800 mb-6">KOKOCD</h2>
+            <div class="flex justify-center gap-6 mb-8">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png" class="h-8 object-contain opacity-50 hover:opacity-100 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" class="h-8 object-contain opacity-50 hover:opacity-100 transition">
+                <div class="h-8 px-2 bg-red-600 text-white font-bold rounded flex items-center text-xs opacity-50 hover:opacity-100 transition cursor-default">Vodafone Cash</div>
+            </div>
+            <p class="text-gray-400 text-sm">جميع الحقوق محفوظة © 2024 KOKOCD Store</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute left-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col" id="cartPanel">
+            <div class="p-6 border-b flex justify-between items-center bg-gray-50">
+                <h2 class="text-xl font-bold text-gray-800">سلة المشتريات</h2>
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-200 rounded-full transition">
+                    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cartItems">
+                <!-- Cart Items -->
+                <div class="text-center text-gray-400 py-10">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <p>السلة فارغة حالياً</p>
+                </div>
+            </div>
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between mb-4 text-lg font-bold">
+                    <span>الإجمالي:</span>
+                    <span id="cartTotal" class="text-indigo-600">0 ج.م</span>
+                </div>
+                <button onclick="openCheckout()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3.5 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all">
+                    إتمام الشراء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal (Simulated) -->
+    <div id="adminModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleAdmin()"></div>
+        <div class="absolute inset-4 md:inset-10 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-scaleIn">
+            <!-- Sidebar -->
+            <div class="w-full md:w-64 bg-slate-900 text-white p-6">
+                <h3 class="text-2xl font-bold mb-8 text-indigo-400">لوحة المدير</h3>
+                <nav class="space-y-2">
+                    <a href="#" class="block px-4 py-3 bg-indigo-600 rounded-lg font-semibold">إدارة المنتجات</a>
+                    <a href="#" class="block px-4 py-3 hover:bg-slate-800 rounded-lg text-gray-300 transition">الطلبات</a>
+                    <a href="#" class="block px-4 py-3 hover:bg-slate-800 rounded-lg text-gray-300 transition">المستخدمين</a>
+                    <a href="#" class="block px-4 py-3 hover:bg-slate-800 rounded-lg text-gray-300 transition">الإعدادات</a>
+                </nav>
+            </div>
+            <!-- Content -->
+            <div class="flex-1 bg-gray-50 p-8 overflow-y-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">المنتجات الحالية</h2>
+                    <button onclick="alert('تمت إضافة منتج جديد (محاكاة)')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow font-semibold flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        إضافة منتج
+                    </button>
+                </div>
+                <div class="bg-white rounded-xl shadow border border-gray-100 overflow-hidden">
+                    <table class="w-full text-right">
+                        <thead class="bg-gray-100 text-gray-600">
+                            <tr>
+                                <th class="p-4">الاسم</th>
+                                <th class="p-4">القسم</th>
+                                <th class="p-4">السعر</th>
+                                <th class="p-4">الحالة</th>
+                                <th class="p-4">إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 font-semibold">Windows 11 Pro</td>
+                                <td class="p-4 text-gray-500">ويندوز</td>
+                                <td class="p-4 text-indigo-600">250 ج.م</td>
+                                <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">نشط</span></td>
+                                <td class="p-4 text-gray-400 cursor-pointer hover:text-red-500">حذف</td>
+                            </tr>
+                            <!-- More mock rows could go here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button onclick="toggleAdmin()" class="absolute top-4 left-4 p-2 bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 rounded-full transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-[110] hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 animate-scaleIn">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-gray-900">إتمام الدفع</h3>
+                    <button onclick="closeCheckout()" class="text-gray-400 hover:text-gray-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                </div>
+                
+                <div class="space-y-4 mb-6">
+                    <label class="flex items-center p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition border-indigo-200 bg-indigo-50/50">
+                        <input type="radio" name="payment" class="w-5 h-5 text-indigo-600" checked>
+                        <div class="mr-4 flex-1">
+                            <span class="font-bold block text-gray-800">Vodafone Cash</span>
+                            <span class="text-xs text-gray-500">ارفق صورة التحويل للتأكيد اليدوي</span>
+                        </div>
+                        <span class="text-red-600 font-bold text-sm">010xxxxxxx</span>
+                    </label>
+                    <label class="flex items-center p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
+                        <input type="radio" name="payment" class="w-5 h-5 text-indigo-600">
+                        <div class="mr-4 flex-1">
+                            <span class="font-bold block text-gray-800">InstaPay</span>
+                            <span class="text-xs text-gray-500">الدفع السريع عبر المعرف</span>
+                        </div>
+                        <span class="text-purple-600 font-bold text-sm">@kokocd</span>
+                    </label>
+                    <label class="flex items-center p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
+                        <input type="radio" name="payment" class="w-5 h-5 text-indigo-600">
+                        <div class="mr-4 flex-1">
+                            <span class="font-bold block text-gray-800">بطاقة ائتمان</span>
+                            <span class="text-xs text-gray-500">Visa / Mastercard</span>
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="w-8 h-5 bg-gray-200 rounded"></div>
+                            <div class="w-8 h-5 bg-gray-200 rounded"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <button onclick="alert('تم استلام طلبك! سيتم مراجعة الدفع وإرسال الروابط.'); closeCheckout(); toggleCart();" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold shadow-lg transition-all transform hover:scale-[1.02]">
+                    تأكيد ودفع
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
